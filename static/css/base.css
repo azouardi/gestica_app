@@ -1,0 +1,7 @@
+.th-sort-asc:after {
+    content: "\2191"; /* Flèche vers le haut */
+}
+
+.th-sort-desc:after {
+    content: "\2193"; /* Flèche vers le bas */
+}

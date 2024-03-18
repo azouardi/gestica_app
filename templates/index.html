@@ -1,0 +1,52 @@
+<html>
+    <head>
+        <title>Home</title>
+        <style>
+            .box {
+                width: 100px;
+                height: 100px;
+                background-color: red;
+            }
+            .box2 {
+                width: 100px;
+                height: 100px;
+                background-color: green;
+            }
+            .box3 {
+                width: 100px;
+                height: 100px;
+                background-color: blue;
+            }
+        </style>    
+    </head>
+    <body>
+        <h1>Welcome to the home page</h1>
+        <div id="app">
+            {{greeting}}
+            <input v-model="greeting" />
+
+            <hr/>
+            <div v-if="isVisible" class="box"></div>
+            <div v-else-if="isVisible2" class="box2"></div>
+            <div v-else class="box3"></div>
+
+        </div>
+
+        <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+        <script>
+            let app = Vue.createApp(
+                {
+                    data : function() {
+                        return {
+                            greeting : 'Hello Vue !',
+                            isVisible2 : false
+                        }
+                    }
+                }
+            )
+            app.mount('#app')
+        </script>
+    </body>
+
+</html>
+  

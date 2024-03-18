@@ -1,0 +1,337 @@
+{% extends "base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %}Formulaire Entreprise{% endblock %}
+{% block content %}
+
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+          <div class="row mb-2">
+            <div class="col-sm-6">
+              <h1>Formulaire Entreprise</h1>
+            </div>
+            <div class="col-sm-6">
+              <ol class="breadcrumb float-sm-right">
+                <li class="breadcrumb-item"><a href="{% url 'office:company_list' %}">Liste Entreprises</a></li>
+                <li class="breadcrumb-item active">Entreprise</li>
+              </ol>
+            </div>
+          </div>
+        </div><!-- /.container-fluid -->
+      </section>
+
+
+
+  
+      <section class="content">
+        <div class="container-fluid">
+            <!-- Ajoutez justify-content-center pour centrer les colonnes enfants -->
+            <div class="row justify-content-center"> 
+                <div class="col-md-12">
+                    <div class="card card-info">
+                        <div class="card-header">
+                            <h3 class="card-title">Formulaire</h3>
+                        </div>
+                        <!-- /.card-header -->
+
+
+                         <!-- form start -->
+                        <form id="quickForm" method="post" enctype="multipart/form-data">
+
+                            <!-- .card-body start-->
+                            <div class="card-body">
+                                {% csrf_token %}
+                                
+                                    <div class="row"><!-- .row start -->
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                {{ form.name.label_tag }}
+                                                {{ form.name }}
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                {{ form.group.label_tag }}
+                                                {{ form.group }}
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                {{ form.national_law.label_tag }}
+                                                {{ form.national_law }}
+                                            </div>
+
+                                        </div>
+                                    </div><!-- /.row end-->
+                                    
+                                    <div class="row"><!-- .row start -->
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                {{ form.share_capital.label_tag }}
+                                                {{ form.share_capital }}
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                {{ form.nominal_value.label_tag }}
+                                                {{ form.nominal_value }}
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                {{ form.legal_form.label_tag }}
+                                                {{ form.legal_form }}
+                                            </div>
+                                        </div>
+                                    </div><!-- /.row end-->
+
+                                    <div class="row"><!-- .row start -->
+                                        <div class="col-md-9">
+                                            <div class="form-group">
+                                                {{ form.adresse.label_tag }}
+                                                {{ form.adresse }}
+                                            </div>
+                                        </div>
+                                    </div><!-- /.row end-->
+
+                                    <div class="row"><!-- .row start -->
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                {{ form.city.label_tag }}
+                                                {{ form.city }}
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-3">  
+                                            <div class="form-group">
+                                                {{ form.code_postal.label_tag }}
+                                                {{ form.code_postal }}
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                {{ form.country.label_tag }}
+                                                {{ form.country }}
+                                            </div>
+                                        </div>
+                                    </div><!-- /.row end-->
+
+                                    <div class="row"><!-- .row start -->
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                {{ form.class_tp.label_tag }}
+                                                {{ form.class_tp }}
+                                            </div>
+                                        </div>
+                                    </div><!-- /.row end-->
+                                    
+                                    <div class="row"><!-- .row start -->
+
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                {{ form.activity.label_tag }}
+                                                {{ form.activity }}
+                                            </div>
+                                        </div>
+                                    </div><!-- /.row end-->
+
+                                    <div class="row"><!-- .row start -->
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                {{ form.ice.label_tag }}
+                                                {{ form.ice }}
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div class="form-group">
+                                                {{ form.tp.label_tag }}
+                                                {{ form.tp }}
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div class="form-group">
+                                                {{ form.identifiant_fiscal.label_tag }}
+                                                {{ form.identifiant_fiscal }}
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div class="form-group">
+                                                {{ form.rc.label_tag }}
+                                                {{ form.rc }}
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div class="form-group">
+                                                {{ form.cnss.label_tag }}
+                                                {{ form.cnss }}
+                                            </div>
+                                        </div>
+                                    </div><!-- /.row end-->
+
+                                    <div class="row"><!-- .row start -->
+                                        <div class="col-md-2">
+                                            <div class="form-group">
+                                                {{ form.fiscal_year.label_tag }}
+                                                {{ form.fiscal_year }}
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div class="form-group">
+                                                {{ form.create_date.label_tag }}
+                                                {{ form.create_date }}
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div class="form-group">
+                                                {{ form.terminate_date.label_tag }}
+                                                {{ form.terminate_date }}
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div class="form-group">
+                                                {{ form.liquidation_date.label_tag }}
+                                                {{ form.liquidation_date }}
+                                            </div>
+                                        </div>
+                                    </div><!-- /.row end-->                                    
+                                    <div class="row"><!-- .row start -->
+                                        <div class="col-md-2">
+                                            <div class="form-group">
+                                                {{ form.statut.label_tag }}
+                                                {{ form.statut }}
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div class="form-group">
+                                                {{ form.nationality.label_tag }}
+                                                {{ form.nationality }}
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div class="form-group">
+                                                {{ form.currency.label_tag }}
+                                                {{ form.currency }}
+                                            </div>
+                                        </div>
+                                    </div><!-- /.row end-->                                    
+
+                                    <div class="row"><!-- .row start -->
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                {{ form.logo.label_tag }}
+                                                {{ form.logo }}
+                                            </div>
+                                            {% if form.instance.logo %}
+                                                <div>
+                                                    <a href="{{ form.instance.logo.url }}">Voir le logo actuel</a>
+                                                    {{ form.delete_logo }} {{ form.delete_logo.label_tag }}
+                                                </div>
+                                            {% endif %}
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                {{ form.file_rc.label_tag }}
+                                                {{ form.file_rc }}
+                                            </div>
+                                            {% if form.instance.file_rc %}
+                                                <div>
+                                                    <a href="{{ form.instance.file_rc.url }}">Voir le fichier RC actuel</a>
+                                                    {{ form.delete_file_rc }} {{ form.delete_file_rc.label_tag }}
+                                                </div>
+                                            {% endif %}
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                    {{ form.file_if.label_tag }}
+                                                    {{ form.file_if }}
+                                              </div>
+                                              {% if form.instance.file_if %}
+                                              <div>
+                                                  <a href="{{ form.instance.file_if.url }}">Voir le bulletin IF actuel</a>
+                                                  {{ form.delete_file_if }} {{ form.delete_file_if.label_tag }}
+                                              </div>
+                                            {% endif %}
+                                        </div>
+
+                                    </div><!-- /.row end-->
+                                    
+                                </div>
+                            <!-- /.card-body -->
+                            
+                            <!--.card-footer start-->
+                           <div class="card-footer">
+                                <button type="submit" class="btn btn-info">Enregistrer</button>
+                            </div>
+                            <!-- /.card-footer -->
+
+
+                        </form>
+                        <!-- form end -->
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.container-fluid -->
+    </section>
+    
+{% endblock %}
+
+{% block javascript %}
+<!-- jQuery -->
+<!-- jQuery -->
+<script src="{% static 'assets/plugins/jquery/jquery.min.js' %}"></script>
+<!-- Bootstrap 4 -->
+<script src="{% static 'assets/plugins/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+<!-- jquery-validation -->
+<script src="{% static 'assets/plugins/jquery-validation/jquery.validate.min.js' %}"></script>
+<script src="{% static 'assets/plugins/jquery-validation/additional-methods.min.js' %}"></script>
+<!-- AdminLTE App -->
+<!-- Page specific script -->
+
+
+<script>
+    $(document).ready(function() {
+        $('#quickForm').validate({
+            rules: {
+                // Assurez-vous que les noms des champs correspondent à ceux définis dans vos formulaires Django
+                name: {
+                    required: true
+                },
+                ice: {
+                    required: true,
+                    minlength: 15,
+                    maxlength: 15
+                },
+                // Vous pouvez ajouter des règles supplémentaires ici pour d'autres champs
+            },
+            messages: {
+                name: {
+                    required: "Ce champ est obligatoire."
+                },
+                ice: {
+                    required: "Ce champ est obligatoire.",
+                    minlength: "L'ICE doit contenir exactement 15 caractères.",
+                    maxlength: "L'ICE doit contenir exactement 15 caractères."
+                },
+                // Messages personnalisés pour d'autres champs
+            },
+            errorElement: 'span',
+            errorPlacement: function (error, element) {
+                error.addClass('invalid-feedback');
+                element.closest('.form-group').append(error); // Assurez-vous que cela correspond à la structure de votre HTML
+            },
+            highlight: function (element, errorClass, validClass) {
+                $(element).addClass('is-invalid');
+            },
+            unhighlight: function (element, errorClass, validClass) {
+                $(element).removeClass('is-invalid');
+            }
+        });
+    });
+    </script>
+{% endblock %}
+```

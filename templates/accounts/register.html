@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AD Associés | Créer un compte</title>
+  <!-- Toastr -->
+  <link rel="stylesheet" href="{% static 'assets/plugins/toastr/toastr.min.css' %}">
+  <link href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+
+  <!-- Google Font: Source Sans Pro -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="{% static 'assets/plugins/fontawesome-free/css/all.min.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/plugins/fontawesome-free/css/fontawesome.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/plugins/fontawesome-free/css/brands.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/plugins/fontawesome-free/css/solid.css' %}">
+  <!-- icheck bootstrap -->
+  <link rel="stylesheet" href="{% static 'assets/plugins/icheck-bootstrap/icheck-bootstrap.min.css' %}">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="{% static 'assets/dist/css/adminlte.min.css' %}">
+</head>
+<body class="hold-transition register-page">
+  
+<div class="register-box">
+  <div class="register-logo">
+    <a href="https://wwwadassocies.ma"><b>AD</b>Associés</a>
+  </div>
+
+  <div class="card">
+    <div class="card-body register-card-body">
+      <p class="login-box-msg">Créer un compte</p>
+
+      <form id="quickForm" action="{% url 'accounts:register' %}" method="post">
+        {% csrf_token %}
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" name="{{user_form.username.html_name }}" placeholder="{{ user_form.username.label }}">
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-user"></span>
+            </div>
+          </div>
+        </div>
+        <div class="input-group mb-3">
+          <input type="email" class="form-control" name="{{user_form.email.html_name }}" placeholder="{{ user_form.email.label }}">
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-envelope"></span>
+            </div>
+          </div>
+        </div>
+        <div class="input-group mb-3">
+          <input type="password" class="form-control" id="password" name="{{user_form.password.html_name }}" placeholder="{{ user_form.password.label }}">
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-lock"></span>
+            </div>
+          </div>
+        </div>
+        <div class="input-group mb-3">
+          <input type="password" class="form-control" name="{{user_form.password2.html_name }}" placeholder="{{ user_form.password2.label }}">
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-lock"></span>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-8">
+            <div class="icheck-info">
+              <input type="checkbox" id="agreeTerms" name="terms" value="agree">
+              <label for="agreeTerms">
+                J'accepte les <a href="#">termes</a>        
+              </label>
+            </div>
+          </div>
+          <!-- /.col -->
+          <div class="col-4">
+            <button type="submit" class="btn btn-info btn-block">Créer</button>
+          </div>
+          <!-- /.col -->
+        </div>
+      </form>
+
+      <div class="social-auth-links text-center">
+        <p>- OR -</p>
+        <a href="#" class="btn btn-block btn-primary">
+          <i class="fab fa-facebook mr-2"></i> Se connecter en utilisant Facebook
+        </a>
+        <a href="#" class="btn btn-block btn-danger">
+          <i class="fab fa-google-plus mr-2"></i> Se connecter en utilisant Google+
+        </a>
+      </div>
+
+      <a href="{% url 'accounts:login' %}" class="text-center">J'ai déjà un compte</a>
+    </div>
+    <!-- /.form-box -->
+  </div><!-- /.card -->
+</div>
+<!-- /.register-box -->
+
+<!-- jQuery -->
+<script src="{% static 'assets/plugins/jquery/jquery.min.js' %}"></script>
+<!-- Bootstrap 4 -->
+<script src="{% static 'assets/plugins/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+<!-- jquery-validation -->
+<script src="{% static 'assets/plugins/jquery-validation/jquery.validate.min.js' %}"></script>
+<script src="{% static 'assets/plugins/jquery-validation/additional-methods.min.js' %}"></script>
+<!-- AdminLTE App -->
+
+    <script>
+        $(document).ready(function() {
+            $('#quickForm').validate({
+                rules: {
+                    username: {
+                        required: true,
+                    },
+                    password: {
+                        required: true,
+                    },
+                    email: {
+                        required: true,
+                        email: true,
+                    },
+                    password2: {
+                        required: true,
+                        equalTo: "#password"
+                    },
+                },
+                messages: {
+                  username: {
+                        required: "Veuillez entrer votre nom d'utilisateur",
+                    },
+                    password: {
+                        required: "Veuillez entrer votre mot de passe"
+                    },
+                    email: {
+                        required: "Veuillez entrer votre adresse email",
+                        email: "Veuillez entrer une adresse email valide"
+                    },
+                    password2: {
+                        required: "Veuillez confirmer votre mot de passe",
+                        equalTo: "Les mots de passe ne correspondent pas"
+                    },
+                },
+                errorElement: 'span',
+                errorPlacement: function (error, element) {
+                    error.addClass('invalid-feedback');
+                    element.closest('.input-group').append(error);
+                },
+                highlight: function (element, errorClass, validClass) {
+                    $(element).addClass('is-invalid');
+                },
+                unhighlight: function (element, errorClass, validClass) {
+                    $(element).removeClass('is-invalid');
+                }
+            });
+        });
+    </script>
+
+<!-- Toastr -->
+
+
+{% if messages %}
+  {% for message in messages %}
+<script>
+    toastr['{{ message.tags }}']('{{ message }}');
+</script>
+  {% endfor %}
+{% endif %}
+</body>
+</html>

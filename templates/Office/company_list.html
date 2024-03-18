@@ -1,0 +1,185 @@
+{% extends "base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %}Entreprises{% endblock %}
+{% block content %}
+
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+          <div class="row mb-2">
+            <div class="col-sm-6">
+              <h1>Liste des Entreprises</h1>
+            </div>
+            <div class="col-sm-6">
+              <ol class="breadcrumb float-sm-right">
+                <li class="breadcrumb-item"><a href="">Home</a></li>
+                <li class="breadcrumb-item active">Entreprises</li>
+              </ol>
+            </div>
+          </div>
+        </div><!-- /.container-fluid -->
+      </section>
+
+
+
+    <!-- Main content -->
+    <section class="content">
+<!-- Default box -->
+<div class="card">
+    <div class="input-group p-0 d-flex justify-content-between align-items-center">
+      <!-- Bouton Ajouter à gauche -->
+      <div class="p-3">
+        <h3 class="card-title">Liste des entreprises</h3>
+      </div>
+
+  
+      <!-- Titre au centre -->
+      <div class="p-8">
+        <button type="button" class="btn btn-info btn-sm"><i class="fas fa-plus"></i>
+          <a href="{% url 'office:company_create' %}" class="text-white">Ajouter une entreprise</a>
+        </button>
+
+      </div>
+  
+      <!-- Barre de recherche à droite -->
+        <div class="p-3">
+        <form method="GET" action="" >
+            <div class="input-group input-group-sm">
+                <input type="text" class="form-control" placeholder="Rechercher..." name="search_query" value="{{ request.GET.search_query }}">
+                <div class="input-group-append">
+                    <button type="submit" class="btn btn-default">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </div>
+        </form>
+        </div>
+
+    </div>
+  
+        <!-- Default box -->
+            <!-- /.card-header -->
+
+            
+
+
+
+            <!-- /.card-header -->
+          <div class="card-body p-0">
+            <table class="table table-striped projects table-sortable">
+                <thead>
+                    <tr>
+                        <th class="no-sort" style="width: 5%">
+                            
+                        </th>
+                        <th style="width: 20%">
+                            Nom de la société
+                        </th>
+                        <th style="width: 30%">
+                            Informations
+                        </th>
+                        <th>
+                            Progression
+                        </th>
+                        <th style="width: 8%" class="text-center">
+                            Statut
+                        </th>
+                        <th class="no-sort" style="width: 20%">
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for company in page_obj %}
+                    <tr>
+                        <td>
+                            {% if company.logo %}
+                            <img alt="Avatar" class= "table-avatar" src="{{ company.logo.url }}">
+                            {% else %}
+                            <img alt="Avatar" class="table-avatar" src="{% static 'dist/img/avatar.png' %}">
+                            {% endif %}
+                        </td>
+                        <td>
+                            <a>{{ company.name }} </a>
+                            <br/>
+                            <small>   Créée le {{ company.create_date    }}  </small>
+                        </td>
+                        <td>
+
+                            <a>{{ company.legal_form }} </a>
+                            <br/>
+                            <small>   ICE {{ company.ice    }}  </small> - <small>   RC {{ company.rc    }}  </small> - <small>   IF {{ company.identifiant_fiscal    }}  </small>
+                            <br/>
+                            <small>   TP {{ company.tp    }}  </small> - <small>   CNSS {{ company.cnss    }}  </small>
+                        </td>
+                        <td class="project_progress">
+                            <div class="progress progress-sm">
+                                <div class="progress-bar bg-green" role="progressbar" aria-valuenow="57" aria-valuemin="0" aria-valuemax="100" style="width: 57%">
+                                </div>
+                            </div>
+                            <small>
+                                57% Complete
+                            </small>
+                        </td>
+                        <td class="project-state">
+
+                            <span class="badge badge-{% if company.statut == 0 %}success{% elif company.statut == 1 %}danger{% else %}warning{% endif %}">{{company.get_statut_display}}</span>
+                        </td>
+                        <td class="project-actions text-right">
+                            <a class="btn btn-primary btn-sm" href="#">
+                                <i class="fas fa-folder">
+                                </i>
+                            </a>
+                            <a class="btn btn-info btn-sm" href="{% url 'office:company_update' company.id %}">
+                                <i class="fas fa-pencil-alt">
+                                </i>
+                            </a>
+                            <a class="btn btn-danger btn-sm" href="#">
+                                <i class="fas fa-trash">
+                                </i>
+                            </a>
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="5">Aucune société n'a été créée</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            </div>
+            <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+            <div class="card-footer clearfix">
+                <ul class="pagination pagination-sm m-0 float-right">
+                  {% if page_obj.has_previous %}
+                  <li class="page-item">
+                      <a class="page-link" href="?page={{ page_obj.previous_page_number }}&search_query={{ request.GET.search_query }}" aria-label="Précédent">
+                          <span aria-hidden="true">&laquo;</span>
+                      </a>
+                  </li>
+              {% endif %}
+              {% for num in page_obj.paginator.page_range %}
+                  <li class="page-item {% if page_obj.number == num %}active-page{% endif %}">
+                      <a class="page-link" href="?page={{ num }}&search_query={{ request.GET.search_query }}">{{ num }}</a>
+                  </li>
+              {% endfor %}
+              {% if page_obj.has_next %}
+                  <li class="page-item">
+                      <a class="page-link" href="?page={{ page_obj.next_page_number }}&search_query={{ request.GET.search_query }}" aria-label="Suivant">
+                          <span aria-hidden="true">&raquo;</span>
+                      </a>
+                  </li>
+              {% endif %}
+                </ul>
+              </div>
+            </div>
+    </section>
+    <!-- /.content -->
+{% endblock %}
+```
+
+
+

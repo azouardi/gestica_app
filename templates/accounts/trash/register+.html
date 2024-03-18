@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block title %}Create an account{% endblock %}
+{% block content %}
+<h1>Créer un compte</h1>
+<p>Utilisez le formulaire ci-dessous pour créer un compte.</p>
+<form method="post">
+    {% csrf_token %}
+    {{ user_form | crispy}}
+    <button class="btn btn-primary" type="submit" value="Créer">Créer</button>
+</form>
+{% endblock %}
+```
